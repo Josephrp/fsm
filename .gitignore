@@ -1,0 +1,45 @@
+# Binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Build artifacts
+/build/
+/bin/
+/dist/
+__debug*
+
+# Go workspace stuff
+*.log
+*.tmp
+*.cache
+
+# Go modules and dependencies (only if using vendoring)
+vendor/
+
+# IDE/editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*.DS_Store
+
+# OS junk
+Thumbs.db
+ehthumbs.db
+
+# Test output
+coverage.*
+*.coverprofile
+*.testresult
+*.prof
+
+# Private config
+fsm.ini
+*.local.ini
+
+.history/

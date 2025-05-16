@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  fsm:
+    image: snarfdev/fsm:latest
+    ports:
+      - "8080:8080"           # Expose the FSM web UI
+      - "34197:34197/udp"     # Factorio game port (if needed)
+      - "27015:27015"         # RCON port
+    volumes:
+      - ./data:/app/data         # Factorio config files
+      - ./fsm.ini:/app/fsm.ini   # Main FSM configuration
+    environment:
+      # - PUID=1000
+      # - PGID=1000
+      - TZ=UTC
+    restart: unless-stopped
