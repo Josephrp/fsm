@@ -11,7 +11,7 @@ import (
 
 // CreateFileIfMissing creates a file at the specified path if it does not exist.
 // If the file is created, it writes an empty JSON object "{}" as its contents.
-func CreateFileIfMissing(path string) {
+func CreateFileIfMissing(path string, content string) {
 	_, err := os.Stat(path)
 	if err == nil {
 		return
@@ -28,7 +28,7 @@ func CreateFileIfMissing(path string) {
 	}
 	defer file.Close()
 
-	_, err = file.WriteString("{}\n")
+	_, err = file.WriteString(content + "\n")
 	if err != nil {
 		log.Printf("failed to create %s, %v\n", path, err)
 	}

@@ -96,14 +96,12 @@ listen = :8080
 
 #### Initial setup
 
-* Create a directory structure for the files
 
-```shell
-mkdir -p fsm/data
-cd fsm
-```
-
-`docker compose up -d`
+* Use the setup script `curl -fsSL https://raw.githubusercontent.com/snarf-dev/fsm/refs/heads/main/setup-fsm.sh | bash`
+* Edit docker-compose.yml if your port preferences are different
+* Edit fsm.ini and change the RCon password the other settings shouldn't need to be changed and they can be changed in the UI.
+* `docker compose up`
+* On first run you will see the admin password which you can use to log in with 
 
 ---
 

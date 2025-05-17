@@ -1,23 +1,23 @@
 <template>
   <section class="space-y-4">
-    <Tabs value="0">
+    <Tabs value="admins" v-model:value="activeTab">
       <TabList>
-        <Tab value="0">Server Admins</Tab>
-        <Tab value="1">Ban List</Tab>
-        <Tab value="2">White List</Tab>
-        <Tab value="3">Server Settings</Tab>
+        <Tab value="admins">Server Admins</Tab>
+        <Tab value="bans">Ban List</Tab>
+        <Tab value="whitelist">White List</Tab>
+        <Tab value="serversettings">Server Settings</Tab>
       </TabList>
       <TabPanels>
-        <TabPanel value="0">
+        <TabPanel value="admins">
           <FactorioAdminsManager />
         </TabPanel>
-        <TabPanel value="1">
+        <TabPanel value="bans">
           <FactorioBansManager />
         </TabPanel>
-        <TabPanel value="2">
+        <TabPanel value="whitelist">
           <FactorioWhitelistManager />
         </TabPanel>
-        <TabPanel value="3">
+        <TabPanel value="serversettings">
           <FactorioServerSettings />
         </TabPanel>
       </TabPanels>
@@ -36,6 +36,7 @@ import FactorioAdminsManager from './FactorioAdminsManager.vue'
 import FactorioBansManager from './FactorioBansManager.vue'
 import FactorioWhitelistManager from './FactorioWhitelistManager.vue'
 import FactorioServerSettings from './FactorioServerSettings.vue'
+import { useTabState } from '@/composables/useTabState'
 
-const activeTab = ref('admins')
+const { activeTab } = useTabState()
 </script>

@@ -1,6 +1,10 @@
 <template>
   <section class="flex-1 h-[calc(90vh-11rem)] overflow-y-auto">
-    <form @submit.prevent="saveSettings" class="space-y-4 rounded border px-4 py-6">
+    <div v-if="settings === null" class="p-6 bg-yellow-100 border border-yellow-400 text-yellow-800 rounded mb-4">
+      <p class="mb-2 font-semibold">Server settings are unavailable</p>
+      <p class="mb-4">To view or change settings, please start the server.</p>
+    </div>
+    <form v-else @submit.prevent="saveSettings" class="space-y-4 rounded border px-4 py-6">
       <div v-for="(value, key) in settings" :key="key" class="grid grid-cols-[16rem_1fr] gap-4 items-start w-full">
         <label class="capitalize text-md flex items-center justify-between gap-1 w-64 relative">
           <span class="truncate">{{ key }}</span>
@@ -60,7 +64,10 @@
 import { ref, onMounted, watch } from 'vue'
 import { useAppToast } from '@/composables/useAppToast'
 import Button from 'primevue/button'
-import { fetchWithAuth } from '@/api'
+import { API_BASE, fetchWithAuth } from '@/api'
+import { useTabState } from '@/composables/useTabState'
+
+const { activeTab } = useTabState()
 
 const settings = ref({})
 const comments = ref({})
@@ -86,7 +93,11 @@ function removeTag(index) {
 }
 
 async function fetchSettings() {
-  const res = await fetchWithAuth('/factorio-settings')
+  const res = await fetchWithAuth(`${API_BASE}/factorio-settings`)
+  if (!res.ok) {
+    settings.value = null
+    return
+  }
 
   const data = await res.json()
   const temp = {}
@@ -119,7 +130,7 @@ watch(jsonArrayFields, () => {
 }, { deep: true })
 
 async function saveSettings() {
-  const res = await fetchWithAuth('/factorio-settings', {
+  const res = await fetchWithAuth(`${API_BASE}/factorio-settings`, {
     method: 'PUT',
     body: JSON.stringify(settings.value),
   })
@@ -134,4 +145,11 @@ async function saveSettings() {
 document.addEventListener('click', () => {
   visibleTooltip.value = null
 })
+
+watch(activeTab, (val) => {
+  if (val === 'serversettings') {
+    fetchSettings()
+  }
+})
+
 </script>

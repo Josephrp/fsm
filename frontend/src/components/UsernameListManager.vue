@@ -10,7 +10,7 @@
       </Column>
 
       <template
-        #paginatorcontainer="{ first, last, page, pageCount, prevPageCallback, nextPageCallback, totalRecords }: {first: number, last: number, page: number, pageCount?: number,  prevPageCallback: (value: MouseEvent) => void, nextPageCallback: (value: MouseEvent) => void, totalRecords?: number}">
+        #paginatorcontainer="{ first, last, page, pageCount, prevPageCallback, nextPageCallback, totalRecords }: { first: number, last: number, page: number, pageCount?: number, prevPageCallback: (value: MouseEvent) => void, nextPageCallback: (value: MouseEvent) => void, totalRecords?: number }">
         <div
           class="flex items-center gap-4 border border-primary bg-transparent rounded-full w-full py-1 px-2 justify-between">
           <Button icon="pi pi-chevron-left" rounded text @click="prevPageCallback" :disabled="page === 0" />
@@ -39,13 +39,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, computed, watch } from 'vue'
 import { useAppToast } from '@/composables/useAppToast'
 import DataTable from 'primevue/datatable'
 import Column from 'primevue/column'
 import InputText from 'primevue/inputtext'
 import Button from 'primevue/button'
 import { useConfirm } from 'primevue/useconfirm'
+import { useTabState } from '@/composables/useTabState'
+
+const { activeTab } = useTabState()
 
 const props = defineProps<{
   title: string
@@ -105,7 +108,14 @@ const confirmRemove = (name: string) => {
   })
 }
 
+watch(activeTab, (val) => {
+  if (val === 'serversettings') {
+    loadUsers()
+  }
+})
+
 onMounted(() => {
   loadUsers()
 })
+
 </script>

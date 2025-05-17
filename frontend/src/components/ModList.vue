@@ -1,7 +1,8 @@
 <template>
   <section class="space-y-2 rounded border p-4">
     <ul class="space-y-2">
-      <li v-for="mod in mods" :key="mod.name" class="flex items-center justify-between p-2 bg-gray-100 rounded">
+      <li v-for="mod in mods" :key="mod.name"
+        class="flex items-center justify-between p-2 bg-gray-100 dark:bg-gray-400 rounded">
         <span>{{ mod.name }}</span>
         <Button @click="onToggleMod(mod)" class="px-3 py-1" :severity="!mod.enabled ? 'success' : 'danger'">
           {{ mod.enabled ? 'Disable' : 'Enable' }}

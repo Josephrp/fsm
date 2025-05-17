@@ -184,10 +184,10 @@ func (s *ServerManager) createFilesAndDirectories() {
 	helpers.CreateDirectoryIfMissing(s.cfg.Factorio.SavesDir)
 	helpers.CreateDirectoryIfMissing(s.cfg.Factorio.ServerVersions)
 
-	helpers.CreateFileIfMissing(fmt.Sprintf("%s/mod-list.json", s.cfg.Factorio.ModsDir))
-	helpers.CreateFileIfMissing(s.cfg.Factorio.Files.AdminList)
-	helpers.CreateFileIfMissing(s.cfg.Factorio.Files.BanList)
-	helpers.CreateFileIfMissing(s.cfg.Factorio.Files.WhiteList)
+	helpers.CreateFileIfMissing(fmt.Sprintf("%s/mod-list.json", s.cfg.Factorio.ModsDir), "{}")
+	helpers.CreateFileIfMissing(s.cfg.Factorio.Files.AdminList, "[]")
+	helpers.CreateFileIfMissing(s.cfg.Factorio.Files.BanList, "[]")
+	helpers.CreateFileIfMissing(s.cfg.Factorio.Files.WhiteList, "[]")
 }
 
 // broadcastLogLine sends a log line to all subscribed log channels

@@ -7,7 +7,7 @@
 
     <ul class="space-y-2 pt-4">
       <li v-for="save in saves" :key="save.name"
-        class="group flex items-center justify-between p-2 bg-gray-100 rounded">
+        class="group flex items-center justify-between p-2 bg-gray-100 dark:bg-gray-400 rounded">
         <div class="flex items-center gap-2">
           <span>{{ save.name }} ({{ formatSize(save.size) }})</span>
           <Tag v-if="save.name === selectedSave" value="Selected" severity="info" class="ml-2 text-xs" />
