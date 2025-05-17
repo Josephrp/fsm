@@ -23,6 +23,12 @@ Factorio Server Manager (FSM) is a web-based application that allows you to mana
 
 ---
 
+## Screenshots
+
+[Screenshots](screenshots)
+
+---
+
 ## Getting Started
 
 ### Prerequisites
