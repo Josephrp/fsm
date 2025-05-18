@@ -18,7 +18,10 @@
 ---
 
 ### Mod Management Interface
-![Mods](mods.png)
+- Mods
+  ![Mods](mods.png)
+- My Mods
+  ![My Mods](my_mods.png)
 
 ---
 

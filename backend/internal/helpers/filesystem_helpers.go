@@ -7,6 +7,7 @@ import (
 	"io"
 	"log"
 	"os"
+	"path/filepath"
 )
 
 // CreateFileIfMissing creates a file at the specified path if it does not exist.
@@ -89,4 +90,31 @@ func CreateDirectoryIfMissing(path string) error {
 	}
 
 	return nil
+}
+
+// DeleteFile removes the file at the specified path if it exists.
+// Logs an error if the file cannot be deleted.
+func DeleteFile(path string) error {
+	err := os.Remove(path)
+	if err != nil {
+		if os.IsNotExist(err) {
+			log.Printf("File %s does not exist, nothing to delete\n", path)
+			return nil
+		}
+		log.Printf("Failed to delete file %s: %v\n", path, err)
+		return err
+	}
+	log.Printf("Deleted file %s\n", path)
+	return nil
+}
+
+// FileExistsWildcard returns true if any file matching the given glob pattern exists.
+// For example, "file_*.zip".
+func FileExistsWildcard(pattern string) bool {
+	matches, err := filepath.Glob(pattern)
+	if err != nil {
+		log.Printf("Invalid glob pattern %s: %v\n", pattern, err)
+		return false
+	}
+	return len(matches) > 0
 }

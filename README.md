@@ -15,7 +15,7 @@ Factorio Server Manager (FSM) is a web-based application that allows you to mana
 - **Start/Stop Server** — Control the server lifecycle with a single click.
 - **Real-time Logs** — View the server logs as they stream in live.
 - **Save Game Management** — Upload, download, delete, and switch between save games.
-- **Mod Management** — Enable or disable installed mods through the UI.
+- **Mod Management** — Download, Install, Uninstall, Enable or disable installed mods through the UI.
 - **Server Settings Editor** — Modify `server-settings.json` dynamically with tooltips and validation.
 - **Admin Authentication** — Simple admin section using INI-based authentication with hashed passwords.
 - **Version Management** — Download and switch between Factorio server versions from the official sources.

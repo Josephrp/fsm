@@ -24,7 +24,7 @@
               <ServerControls :status="status" @refreshStatus="updateStatus" />
             </TabPanel>
             <TabPanel value="mods" class="flex-1 overflow-hidden h-full min-h-0">
-              <ModList />
+              <Mods />
             </TabPanel>
             <TabPanel value="factorio" class="flex-1 overflow-hidden h-full min-h-0">
               <FactorioSettings />
@@ -63,7 +63,7 @@ import TabPanel from 'primevue/tabpanel';
 import Toast from 'primevue/toast';
 
 import ServerControls from '@/components/ServerControls.vue'
-import ModList from '@/components/ModList.vue'
+import Mods from '@/components/Mods.vue'
 import RconConsole from '@/components/RconConsole.vue'
 import SavesManager from '@/components/SavesManager.vue'
 import ServerSettings from '@/components/ServerSettings.vue'

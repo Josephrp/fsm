@@ -8,6 +8,9 @@ export const fetchWithAuth = async (url: string, options: RequestInit = {}): Pro
   const headers = new Headers(options.headers || {})
 
   if (!headers.has('Authorization')) {
+    if (username === '' && password === '') {
+      throw Error('No logged in')
+    }
     headers.set('Authorization', 'Basic ' + btoa(`${username}:${password}`))
   }
   if (options.body && !headers.has('Content-Type') && !(options.body instanceof FormData)) {
@@ -168,6 +171,60 @@ export const toggleMod = async (mod: Mod) => {
   const res = await fetchWithAuth(url, { method: 'POST' })
   const data = await res.json()
   return data.mods || []
+}
+
+export const fetchBookmarkedMods = async () => {
+  const res = await fetchWithAuth(`${API_BASE}/mods/bookmarked`)
+  const data = await res.json()
+  return data || {}
+}
+
+export const downloadMod = async (mod: string, version: string) => {
+  try {
+    const res = await fetchWithAuth(`${API_BASE}/mods/download/${mod}/${version}`)
+    if (!res.ok) {
+      const message = (await res.json())?.message || null
+      throw Error(message ? message : 'Failed to download mod.')
+    }
+  } catch (e) {
+    throw e
+  }
+}
+
+export const installMod = async (mod: string, version: string) => {
+  try {
+    const res = await fetchWithAuth(`${API_BASE}/mods/install/${mod}/${version}`, { method: 'PUT' })
+    if (!res.ok) {
+      const message = (await res.json())?.message || null
+      throw Error(message ? message : 'Failed to install mod.')
+    }
+  } catch (e) {
+    throw e
+  }
+}
+
+export const uninstallMod = async (mod: string, version: string) => {
+  try {
+    const res = await fetchWithAuth(`${API_BASE}/mods/uninstall/${mod}/${version}`, { method: 'DELETE' })
+    if (!res.ok) {
+      const message = (await res.json())?.message || null
+      throw Error(message ? message : 'Failed to uninstall mod.')
+    }
+  } catch (e) {
+    throw e
+  }
+}
+
+export const deleteMod = async (mod: string, version: string) => {
+  try {
+    const res = await fetchWithAuth(`${API_BASE}/mods/${mod}/${version}`, { method: 'DELETE' })
+    if (!res.ok) {
+      const message = (await res.json())?.message || null
+      throw Error(message ? message : 'Failed to delete mod.')
+    }
+  } catch (e) {
+    throw e
+  }
 }
 
 // ----------------------------------------------------------------------------
